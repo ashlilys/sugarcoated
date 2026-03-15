@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sugarcoated - ashlilys</title>
+    <link rel="icon" type="image/x-icon" href="cakeroll.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #fdf6f3;
+            background-image: url('bakery_entrance.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* --- TOP NAV BAR --- */
+        #top-bar {
+            width: 100%; height: 50px; background: #ffdbdb; 
+            display: flex; align-items: center; padding: 0 20px; 
+            border-bottom: 2px solid #f8a5a5; z-index: 1000;
+        }
+        .nav-left { flex: 1; text-align: left; }
+        .nav-right { flex: 1; text-align: right; }
+        .nav-center { 
+            flex: 2; text-align: center; font-weight: bold; color: #d17a7a; 
+            font-size: 18px; letter-spacing: 2px; text-transform: lowercase; 
+            font-family: 'Courier New', Courier, monospace; 
+        }
+        
+        #top-bar a { 
+            text-decoration: none; color: #d17a7a; font-weight: bold; 
+            font-size: 14px; font-family: 'Courier New', Courier, monospace; 
+        }
+        #top-bar a:hover { color: #ff8b8b; }
+
+        /* --- INTRO BOX --- */
+        #main-content {
+            display: flex; justify-content: center; align-items: center; min-height: 80vh;
+        }
+
+        .frosted-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 80px;
+            border-radius: 40px;
+            border: 4px dashed #f8a5a5;
+            text-align: center;
+            max-width: 750px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .frosted-box h1 {
+            font-size: 48px;
+            color: #d17a7a;
+            letter-spacing: 3px;
+        }
+
+        .frosted-box p {
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 18px 40px;
+            background-color: #f8a5a5;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .start-button:hover { transform: scale(1.05); background-color: #ff8b8b; }
+    </style>
+</head>
+<body>
+
+    <div id="top-bar">
+        <div class="nav-left">
+            <a href="index.html">← go to entrance</a>
+        </div>
+        <div class="nav-center">sugarcoated</div>
+        <div class="nav-right">
+            <a href="https://www.instagram.com/ashliliez/" target="_blank">my instagram: @ashlilys</a>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="frosted-box">
+            <h1>sugarcoated</h1>
+            <br>
+            <p>a tiny corner for small delights.</p>
+            <a href="requests.html" class="start-button">enter the bakery</a>
+        </div>
+    </div>
+
+</body>
+</html>
