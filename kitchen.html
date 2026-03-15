@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <title>sugarcoated - kitchen</title>
+    <link rel="icon" type="image/x-icon" href="cakeroll.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #fdf6f3; 
+            display: flex; flex-direction: column; 
+            align-items: center; min-height: 100vh;
+        }
+
+        /* --- TOP NAV BAR (Matches the rest of the site) --- */
+        #top-bar { 
+            width: 100%; height: 50px; background: #ffdbdb; 
+            display: flex; align-items: center; padding: 0 20px; 
+            border-bottom: 2px solid #f8a5a5; z-index: 1000; 
+        }
+        .nav-left { flex: 1; text-align: left; }
+        .nav-right { flex: 1; text-align: right; }
+        .nav-center { 
+            flex: 2; text-align: center; font-weight: bold; color: #d17a7a; 
+            font-size: 18px; letter-spacing: 2px; text-transform: lowercase; 
+            font-family: 'Courier New', Courier, monospace; 
+        }
+        
+        #top-bar a { 
+            text-decoration: none; color: #d17a7a; font-weight: bold; 
+            font-size: 14px; font-family: 'Courier New', Courier, monospace; 
+        }
+        #top-bar a:hover { color: #ff8b8b; }
+
+        /* --- KITCHEN CONTENT --- */
+        #kitchen-view { 
+            margin-top: 50px; padding: 40px; border: 5px solid #f8a5a5; 
+            border-radius: 30px; background: white; text-align: center;
+        }
+        #food-img { width: 300px; height: 300px; margin-bottom: 20px; object-fit: contain; }
+        
+        .btn { 
+            display: inline-block; background: #f8a5a5; color: white; 
+            padding: 15px 30px; border-radius: 15px; text-decoration: none; 
+            font-weight: bold; font-family: 'Montserrat', sans-serif;
+            margin-top: 20px; transition: 0.3s;
+        }
+        .btn:hover { background: #ff8b8b; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <div id="top-bar">
+        <div class="nav-left"><a href="requests.html">← back to requests</a></div>
+        <div class="nav-center">sugarcoated</div>
+        <div class="nav-right">
+            <a href="https://www.instagram.com/ashliliez/" target="_blank">my instagram: @ashlilys</a>
+        </div>
+    </div>
+
+    <div id="kitchen-view">
+        <h2 id="status-text">Preparing your order...</h2>
+        <img id="food-img" src="" alt="Food Item">
+        <br>
+        <a href="requests.html" class="btn">Back to Requests</a>
+    </div>
+
+    <script>
+        const menu = {
+            'strawberry_shortcake': { name: "Strawberry Shortcake", img: "strawberry_shortcake.png" },
+            'taiyaki': { name: "Taiyaki", img: "taiyaki.png" },
+            'matcha_shokupan': { name: "Matcha Shokupan", img: "matcha_shokupan.png" },
+            'choco_puffs': { name: "Chocolate Puffs", img: "choco_puffs.png" },
+            'mocha_dacquoise': { name: "Mocha Dacquoise", img: "mocha_dacquoise.png" },
+            'cinnamon_roll': { name: "Cinnamon Roll", img: "cinnamon_roll.png" },
+            'napoleon_cheesecake': { name: "Napoleon Cheesecake", img: "napoleon_cheesecake.png" },
+            'baker_special': { name: "Special Baker Treat", img: "baker_special.png" }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const order = params.get('order');
+
+        const item = menu[order];
+        if (item) {
+            document.getElementById('status-text').innerText = "You made: " + item.name;
+            document.getElementById('food-img').src = item.img;
+        } else {
+            document.getElementById('status-text').innerText = "Oops! Order not found: " + order;
+        }
+    </script>
+</body>
+</html>
