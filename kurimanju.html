@@ -20,14 +20,13 @@
 
         @keyframes fadeInAnimation { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-                @keyframes characterBounce {
+        /* Bounce Animation */
+        @keyframes characterBounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-20px); }
         }
 
-        .bounce {
-            animation: characterBounce 0.3s ease;
-        }
+        .bounce { animation: characterBounce 0.3s ease; }
         
         /* nav bar */
         #top-bar { 
@@ -92,30 +91,50 @@
 
         <div id="dialogue-box">
             <p id="text">Kurimanju: "Make it snappy, kid."</p>
-            <button id="order-btn" class="btn" onclick="order()">"What did you want to order, unc."</button>
-            <a id="kitchen-link" href="kitchen.html?order=mocha_dacquoise" class="btn" style="display:none;" onclick="fadeOut(event)">"One Mocha Dacquoise, coming right up."</a>
+            <button id="order-btn" class="btn" onclick="order()">"What did you want to order, unc?"</button>
+            <a id="kitchen-link" href="#" class="btn" style="display:none;" onclick="fadeOut(event)">"Coming right up."</a>
         </div>
     </div>
 
     <script>
+        // Use 'kuriCount' for Kurimanju specifically
+        let clickCount = parseInt(localStorage.getItem('kuriCount')) || 0;
+
+        const kuriOrders = [
+            { text: 'Kurimanju: "I\'ll take the Coffee Jelly. No sugar."', food: "coffee_jelly", reply: "One Coffee Jelly, got it." },
+            { text: 'Kurimanju: "Got any of those Sake Steamed Buns left?"', food: "sake_steamed_bun", reply: "Yup! One Sake Steamed Bun." },
+            { text: 'Kurimanju: "Fine, I\'ll try the Mocha Dacquoise today."', food: "mocha_dacquoise", reply: "One Mocha Dacquoise coming up!" }
+        ];
+
         function order() {
+            // Trigger Bounce
             const charImg = document.getElementById('character-img');
             charImg.classList.add('bounce');
-            setTimeout(() => {
-                charImg.classList.remove('bounce');
-            }, 300);
+            setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
 
-        document.getElementById('text').innerText = 'Hachiware: "Do you happen to have any Taiyaki?"';
-        document.getElementById('order-btn').style.display = 'none'; 
-        document.getElementById('kitchen-link').style.display = 'block'; 
-    }
+            // Get current order based on count
+            const current = kuriOrders[clickCount % kuriOrders.length];
+
+            // Update UI
+            document.getElementById('text').innerText = current.text;
+            document.getElementById('kitchen-link').innerText = current.reply;
+            document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
+            
+            document.getElementById('order-btn').style.display = 'none'; 
+            document.getElementById('kitchen-link').style.display = 'block'; 
+        }
 
         function fadeOut(event) {
             event.preventDefault(); 
+            // Save Kurimanju's progress
+            localStorage.setItem('kuriCount', ++clickCount);
+            
             const container = document.getElementById('game-container');
             container.style.transition = "opacity 0.5s ease"; 
             container.style.opacity = "0"; 
-            setTimeout(() => { window.location.href = event.target.href; }, 500); 
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500); 
         }
     </script>
 </body>
