@@ -100,26 +100,36 @@
     </div>
 
     <script>
+        let clickCount = parseInt(localStorage.getItem('hachiCount')) || 0;
+        const hachiOrders = [
+            { text: 'Hachiware: "Do you happen to have any Taiyaki?"', food: "taiyaki", reply: "One Taiyaki coming up!" },
+            { text: 'Hachiware: "Could I try the Matcha Shokupan please?"', food: "matcha_shokupan", reply: "One Matcha Shokupan coming up!" },
+            { text: 'Hachiware: "Oh! Those Chocolate Puffs look delicious!"', food: "choco_puffs", reply: "One order of Chocolate Puffs!" }
+        ];
+
         function order() {
-            // 1. get character image
             const charImg = document.getElementById('character-img');
-            // 2. Add the bounce class to make it hop
             charImg.classList.add('bounce');
-            // 3. Remove the class after the animation ends (so it can happen again if needed)
-            setTimeout(() => {
-                charImg.classList.remove('bounce');
-            }, 300);
-            document.getElementById('text').innerText = 'Hachiware: "Do you happen to have any Taiyaki?"';
+            setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
+            const current = hachiOrders[clickCount % hachiOrders.length];
+            document.getElementById('text').innerText = current.text;
+            document.getElementById('kitchen-link').innerText = current.reply;
+            document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
+    
             document.getElementById('order-btn').style.display = 'none'; 
             document.getElementById('kitchen-link').style.display = 'block'; 
         }
 
         function fadeOut(event) {
             event.preventDefault(); 
+            localStorage.setItem('hachiCount', ++clickCount);
+    
             const container = document.getElementById('game-container');
             container.style.transition = "opacity 0.5s ease"; 
             container.style.opacity = "0"; 
-            setTimeout(() => { window.location.href = event.target.href; }, 500); 
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500); 
         }
     </script>
 </body>
