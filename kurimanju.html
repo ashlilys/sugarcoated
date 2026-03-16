@@ -20,6 +20,15 @@
 
         @keyframes fadeInAnimation { 0% { opacity: 0; } 100% { opacity: 1; } }
 
+                @keyframes characterBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        .bounce {
+            animation: characterBounce 0.3s ease;
+        }
+        
         /* nav bar */
         #top-bar { 
             width: 100%; height: 50px; background: #ffdbdb; 
@@ -90,10 +99,16 @@
 
     <script>
         function order() {
-            document.getElementById('text').innerText = 'Kurimanju: "Mocha Dacquoise. Do not forget it."';
-            document.getElementById('order-btn').style.display = 'none'; 
-            document.getElementById('kitchen-link').style.display = 'block'; 
-        }
+            const charImg = document.getElementById('character-img');
+            charImg.classList.add('bounce');
+            setTimeout(() => {
+                charImg.classList.remove('bounce');
+            }, 300);
+
+        document.getElementById('text').innerText = 'Hachiware: "Do you happen to have any Taiyaki?"';
+        document.getElementById('order-btn').style.display = 'none'; 
+        document.getElementById('kitchen-link').style.display = 'block'; 
+    }
 
         function fadeOut(event) {
             event.preventDefault(); 
