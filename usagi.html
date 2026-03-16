@@ -19,8 +19,15 @@
         }
 
         @keyframes fadeInAnimation { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -2px); } 100% { transform: translate(1px, 2px); } }
+        
+        /* Usagi's signature screen shake */
+        @keyframes shake { 
+            0% { transform: translate(1px, 1px); } 
+            50% { transform: translate(-1px, -2px); } 
+            100% { transform: translate(1px, 2px); } 
+        }
 
+        /* The hopping animation */
         @keyframes characterBounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-20px); }
@@ -50,7 +57,7 @@
         }
         #top-bar a:hover { color: #ff8b8b; }
 
-        /* character */
+        /* character image */
         #character-img {
             position: absolute; 
             bottom: 250px; left: 50%; 
@@ -99,18 +106,8 @@
     </div>
 
     <script>
-        function order() {
-            const charImg = document.getElementById('character-img');
-            charImg.classList.add('bounce');
-            setTimeout(() => {
-                charImg.classList.remove('bounce');
-            }, 300);
-
-        document.getElementById('text').innerText = 'Hachiware: "Do you happen to have any Taiyaki?"';
-        document.getElementById('order-btn').style.display = 'none'; 
-        document.getElementById('kitchen-link').style.display = 'block'; 
-    }
         let clickCount = parseInt(localStorage.getItem('usagiCount')) || 0;
+        
         const orders = [
             { text: "Usagi: (points at a Cinnamon Roll)", food: "cinnamon_roll" },
             { text: "Usagi: (points at a Napoleon Cheesecake)", food: "napoleon_cheesecake" },
@@ -118,12 +115,23 @@
         ];
 
         function nextOrder() {
+            // Trigger the bounce animation
+            const charImg = document.getElementById('character-img');
+            charImg.classList.add('bounce');
+            setTimeout(() => {
+                charImg.classList.remove('bounce');
+            }, 300);
+
+            // Update dialogue and link
             const current = orders[clickCount % orders.length];
             document.getElementById('text').innerText = current.text;
             document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
+            
+            // Toggle buttons
             document.getElementById('main-btn').style.display = 'none';
             document.getElementById('kitchen-link').style.display = 'block';
             
+            // Trigger background shake (gets faster on the last click)
             const shakeIntensity = (clickCount % orders.length === 2) ? "0.1s" : "0.2s";
             document.getElementById('game-container').style.animation = "shake " + shakeIntensity + " infinite";
         }
