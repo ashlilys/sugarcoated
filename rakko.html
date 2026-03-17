@@ -97,26 +97,21 @@
     </div>
 
     <script>
-        // Use 'rakkoCount' for Rakko specifically
         let clickCount = parseInt(localStorage.getItem('rakkoCount')) || 0;
 
         const rakkoOrders = [
             { text: 'Rakko: "The Pudding Parfait has a certain... elegance to it."', food: "pudding_parfait", reply: "One Pudding Parfait, coming right up." },
-            { text: 'Rakko: "I believe I shall try the Mont Blanc today."', food: "mont_blanc", reply: "Excellent choice, sir." },
-            { text: 'Rakko: "I would like to try the Choco Puffs."', food: "choco_puffs", reply: "Got it, one Choco Puff!" },
-            { text: 'Rakko: "Do you have another Pudding Parfait? I find myself wanting more."', food: "pudding_parfait", reply: "Of course, sir!" }
+            { text: 'Rakko: "I believe I shall try the Choco Puffs today."', food: "choco_puffs", reply: "Got it, one Choco Puff!" },
+            { text: 'Rakko: "I think I\'ll try the Mont Blanc now."', food: "mont_blanc", reply: "Excellent choice, Master." }
         ];
 
         function order() {
-            // Trigger Bounce
             const charImg = document.getElementById('character-img');
             charImg.classList.add('bounce');
             setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
 
-            // Get current order
             const current = rakkoOrders[clickCount % rakkoOrders.length];
 
-            // Update UI
             document.getElementById('text').innerText = current.text;
             document.getElementById('kitchen-link').innerText = current.reply;
             document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
@@ -127,7 +122,6 @@
 
         function fadeOut(event) {
             event.preventDefault(); 
-            // Save progress for Rakko
             localStorage.setItem('rakkoCount', ++clickCount);
             
             const container = document.getElementById('game-container');
