@@ -48,7 +48,7 @@
         }
         #top-bar a:hover { color: #ff8b8b; }
 
-        /* character */
+        /* character image scaling */
         #character-img {
             position: absolute; 
             bottom: 250px; left: 50%; 
@@ -58,7 +58,7 @@
             z-index: 5;
         }
 
-        /* dialogue */
+        /* dialogue box */
         #dialogue-box {
             position: absolute; bottom: 30px; left: 5%; width: 90%; height: 220px;
             background: rgba(255, 255, 255, 0.95); border: 5px solid #f8a5a5;
@@ -67,7 +67,6 @@
         }
         #text { font-size: 22px; color: #555; margin-bottom: 15px; text-align: center; font-family: 'Courier New', Courier, monospace; }
 
-        /* buttons */
         .btn {
             background: #f8a5a5; color: white; border: none; padding: 15px 30px;
             border-radius: 15px; cursor: pointer; font-family: 'Montserrat', sans-serif;
@@ -97,7 +96,6 @@
     </div>
 
     <script>
-        // Use 'kuriCount' for Kurimanju specifically
         let clickCount = parseInt(localStorage.getItem('kuriCount')) || 0;
 
         const kuriOrders = [
@@ -107,15 +105,12 @@
         ];
 
         function order() {
-            // Trigger Bounce
             const charImg = document.getElementById('character-img');
             charImg.classList.add('bounce');
             setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
 
-            // Get current order based on count
             const current = kuriOrders[clickCount % kuriOrders.length];
 
-            // Update UI
             document.getElementById('text').innerText = current.text;
             document.getElementById('kitchen-link').innerText = current.reply;
             document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
@@ -126,7 +121,6 @@
 
         function fadeOut(event) {
             event.preventDefault(); 
-            // Save Kurimanju's progress
             localStorage.setItem('kuriCount', ++clickCount);
             
             const container = document.getElementById('game-container');
