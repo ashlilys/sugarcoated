@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         #game-container {
-            width: 100vw; height: 100vh;
+            width: 100vw; height: 100 vh;
             background-image: url('bakery_interior.png');
             background-size: cover; background-position: center;
             background-attachment: fixed;
@@ -20,16 +20,13 @@
 
         @keyframes fadeInAnimation { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-        /* bouncing motion (for character after dialogue option is selected) */
+        /* bouncing motion */
         @keyframes characterBounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-20px); }
         }
 
-        /* trigger with javascript */
-        .bounce {
-            animation: characterBounce 0.3s ease;
-        }
+        .bounce { animation: characterBounce 0.3s ease; }
         
         /* nav bar */
         #top-bar { 
@@ -95,22 +92,24 @@
         <div id="dialogue-box">
             <p id="text">Hachiware: "Hello! Nice to see you today."</p>
             <button id="order-btn" class="btn" onclick="order()">"Hi Hachiware! What would you like?"</button>
-            <a id="kitchen-link" href="kitchen.html?order=taiyaki" class="btn" style="display:none;" onclick="fadeOut(event)">"Yes of course! One Taiyaki coming up!"</a>
+            <a id="kitchen-link" href="#" class="btn" style="display:none;" onclick="fadeOut(event)">"Yes of course!"</a>
         </div>
     </div>
 
     <script>
         let clickCount = parseInt(localStorage.getItem('hachiCount')) || 0;
+        
         const hachiOrders = [
             { text: 'Hachiware: "Do you happen to have any Taiyaki?"', food: "taiyaki", reply: "One Taiyaki coming up!" },
-            { text: 'Hachiware: "Could I try the Matcha Shokupan please?"', food: "matcha_shokupan", reply: "One Matcha Shokupan coming up!" },
-            { text: 'Hachiware: "Oh! Those Chocolate Puffs look delicious!"', food: "choco_puffs", reply: "One order of Chocolate Puffs!" }
+            { text: 'Hachiware: "Oh! Could I get the Pudding with the little cherry?"', food: "pudding", reply: "One Pudding coming right up!" },
+            { text: 'Hachiware: "The Matcha Tiramisu looks so fancy! May I try that?"', food: "matcha_tiramisu", reply: "One Matcha Tiramisu for you!" }
         ];
 
         function order() {
             const charImg = document.getElementById('character-img');
             charImg.classList.add('bounce');
             setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
+            
             const current = hachiOrders[clickCount % hachiOrders.length];
             document.getElementById('text').innerText = current.text;
             document.getElementById('kitchen-link').innerText = current.reply;
