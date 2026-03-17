@@ -93,11 +93,19 @@
         <div id="dialogue-box">
             <p id="text">Momonga: "Hey. Give me something good."</p>
             <button id="order-btn" class="btn" onclick="order()">"Oh.. hello Momonga..! what would you like...?"</button>
-            <a id="kitchen-link" href="kitchen.html?order=matcha_shokupan" class="btn" style="display:none;" onclick="fadeOut(event)">"Sure, one bread coming up."</a>
+            <a id="kitchen-link" href="#" class="btn" style="display:none;" onclick="fadeOut(event)">"Coming right up!"</a>
         </div>
     </div>
 
     <script>
+        let clickCount = parseInt(localStorage.getItem('momoCount')) || 0;
+
+        const momoOrders = [
+            { text: 'Momonga: "Look at me! Now give me a Fruit Sandwich."', food: "fruit_sandwich", reply: "One Fruit Sandwich for the cutest!" },
+            { text: 'Momonga: "I want something colorful. A Macaron!"', food: "macaron", reply: "One Macaron coming up!" },
+            { text: 'Momonga: "Praise me more! And give me another Fruit Sandwich!"', food: "fruit_sandwich", reply: "You got it, Momonga!" }
+        ];
+
         function order() {
             const charImg = document.getElementById('character-img');
             charImg.classList.add('bounce');
@@ -105,13 +113,18 @@
                 charImg.classList.remove('bounce');
             }, 300);
 
-        document.getElementById('text').innerText = 'Hachiware: "Do you happen to have any Taiyaki?"';
-        document.getElementById('order-btn').style.display = 'none'; 
-        document.getElementById('kitchen-link').style.display = 'block'; 
-    }
+            const current = momoOrders[clickCount % momoOrders.length];
+            document.getElementById('text').innerText = current.text;
+            document.getElementById('kitchen-link').innerText = current.reply;
+            document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
+
+            document.getElementById('order-btn').style.display = 'none'; 
+            document.getElementById('kitchen-link').style.display = 'block'; 
+        }
 
         function fadeOut(event) {
             event.preventDefault(); 
+            localStorage.setItem('momoCount', ++clickCount);
             const container = document.getElementById('game-container');
             container.style.transition = "opacity 0.5s ease"; 
             container.style.opacity = "0"; 
