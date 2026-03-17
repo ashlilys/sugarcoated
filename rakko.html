@@ -20,14 +20,13 @@
 
         @keyframes fadeInAnimation { 0% { opacity: 0; } 100% { opacity: 1; } }
 
+        /* Bounce Animation */
         @keyframes characterBounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(-20px); }
         }
 
-        .bounce {
-            animation: characterBounce 0.3s ease;
-        }
+        .bounce { animation: characterBounce 0.3s ease; }
         
         /* nav bar */
         #top-bar { 
@@ -92,30 +91,50 @@
 
         <div id="dialogue-box">
             <p id="text">Rakko: "A fine day for a snack."</p>
-            <button id="order-btn" class="btn" onclick="order()">"Indeed! What are you craving?"</button>
-            <a id="kitchen-link" href="kitchen.html?order=choco_puffs" class="btn" style="display:none;" onclick="fadeOut(event)">"Excellent choice, sir."</a>
+            <button id="order-btn" class="btn" onclick="order()">"Indeed! What are you craving, Master?"</button>
+            <a id="kitchen-link" href="#" class="btn" style="display:none;" onclick="fadeOut(event)">"Excellent choice, sir."</a>
         </div>
     </div>
 
     <script>
+        // Use 'rakkoCount' for Rakko specifically
+        let clickCount = parseInt(localStorage.getItem('rakkoCount')) || 0;
+
+        const rakkoOrders = [
+            { text: 'Rakko: "The Pudding Parfait has a certain... elegance to it."', food: "pudding_parfait", reply: "One Pudding Parfait, coming right up." },
+            { text: 'Rakko: "I believe I shall try the Mont Blanc today."', food: "mont_blanc", reply: "Excellent choice, Master." },
+            { text: 'Rakko: "Do you have another Pudding Parfait? I find myself wanting more."', food: "pudding_parfait", reply: "Of course, sir!" }
+        ];
+
         function order() {
+            // Trigger Bounce
             const charImg = document.getElementById('character-img');
             charImg.classList.add('bounce');
-            setTimeout(() => {
-                charImg.classList.remove('bounce');
-            }, 300);
+            setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
 
-        document.getElementById('text').innerText = 'Hachiware: "Do you happen to have any Taiyaki?"';
-        document.getElementById('order-btn').style.display = 'none'; 
-        document.getElementById('kitchen-link').style.display = 'block'; 
-    }
+            // Get current order
+            const current = rakkoOrders[clickCount % rakkoOrders.length];
+
+            // Update UI
+            document.getElementById('text').innerText = current.text;
+            document.getElementById('kitchen-link').innerText = current.reply;
+            document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
+            
+            document.getElementById('order-btn').style.display = 'none'; 
+            document.getElementById('kitchen-link').style.display = 'block'; 
+        }
 
         function fadeOut(event) {
             event.preventDefault(); 
+            // Save progress for Rakko
+            localStorage.setItem('rakkoCount', ++clickCount);
+            
             const container = document.getElementById('game-container');
             container.style.transition = "opacity 0.5s ease"; 
             container.style.opacity = "0"; 
-            setTimeout(() => { window.location.href = event.target.href; }, 500); 
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500); 
         }
     </script>
 </body>
