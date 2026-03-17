@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         #game-container {
-            width: 100vw; height: 100 vh;
+            width: 100vw; height: 100vh;
             background-image: url('bakery_interior.png');
             background-size: cover; background-position: center;
             background-attachment: fixed;
@@ -100,8 +100,8 @@
         let clickCount = parseInt(localStorage.getItem('hachiCount')) || 0;
         
         const hachiOrders = [
-            { text: 'Hachiware: "Do you happen to have any Taiyaki?"', food: "taiyaki", reply: "One Taiyaki coming up!" },
             { text: 'Hachiware: "Oh! Could I get the Pudding?"', food: "pudding", reply: "One Pudding coming right up!" },
+            { text: 'Hachiware: "Do you happen to have any Taiyaki?"', food: "taiyaki", reply: "One Taiyaki coming up!" },
             { text: 'Hachiware: "The Matcha Tiramisu looks so fancy! May I try that?"', food: "matcha_tiramisu", reply: "One Matcha Tiramisu for you!" }
         ];
 
