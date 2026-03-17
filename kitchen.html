@@ -77,8 +77,8 @@
             'fruit_tart': { name: "Fruit Tart", img: "fruit_tart.png" },
 
             // Hachiware
-            'taiyaki': { name: "Taiyaki", img: "taiyaki.png" },
             'pudding': { name: "Pudding", img: "pudding.png" },
+            'taiyaki': { name: "Taiyaki", img: "taiyaki.png" },
             'matcha_tiramisu': { name: "Matcha Tiramisu", img: "matcha_tiramisu.png" },
 
             // Usagi
@@ -88,16 +88,18 @@
 
             // Kurimanju
             'coffee_jelly': { name: "Coffee Jelly", img: "coffee_jelly.png" },
-            'sake_steamed_bun': { name: "Sake Steamed Bun", img: "sake_steamed_bun.png" },
             'mocha_dacquoise': { name: "Mocha Dacquoise", img: "mocha_dacquoise.png" },
+            'sake_steamed_bun': { name: "Sake Steamed Bun", img: "sake_steamed_bun.png" },
 
             // Rakko
             'pudding_parfait': { name: "Pudding Parfait", img: "pudding_parfait.png" },
+            'choco_puffs': { name: "Chocolate Puffs", img: "choco_puffs.png" },
             'mont_blanc': { name: "Mont Blanc", img: "mont_blanc.png" },
 
             // Momonga
             'fruit_sandwich': { name: "Fruit Sandwich", img: "fruit_sandwich.png" },
-            'macaron': { name: "Macaron", img: "macaron.png" }
+            'macaron': { name: "Macaron", img: "macaron.png" },
+            'matcha_shokupan': { name: "Matcha Shokupan", img: "matcha_shokupan.png" }
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -109,7 +111,6 @@
             document.getElementById('food-img').src = item.img;
         } else {
             document.getElementById('status-text').innerText = "Oops! Order not found: " + order;
-            // Optional: show a default image if order is missing
             document.getElementById('food-img').src = "cakeroll.png";
         }
     </script>
