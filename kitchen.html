@@ -71,14 +71,33 @@
 
     <script>
         const menu = {
+            // Chiikawa
             'strawberry_shortcake': { name: "Strawberry Shortcake", img: "strawberry_shortcake.png" },
+            'dorayaki': { name: "Dorayaki", img: "dorayaki.png" },
+            'fruit_tart': { name: "Fruit Tart", img: "fruit_tart.png" },
+
+            // Hachiware
             'taiyaki': { name: "Taiyaki", img: "taiyaki.png" },
-            'matcha_shokupan': { name: "Matcha Shokupan", img: "matcha_shokupan.png" },
-            'choco_puffs': { name: "Chocolate Puffs", img: "choco_puffs.png" },
-            'mocha_dacquoise': { name: "Mocha Dacquoise", img: "mocha_dacquoise.png" },
+            'pudding': { name: "Pudding", img: "pudding.png" },
+            'matcha_tiramisu': { name: "Matcha Tiramisu", img: "matcha_tiramisu.png" },
+
+            // Usagi
             'cinnamon_roll': { name: "Cinnamon Roll", img: "cinnamon_roll.png" },
             'napoleon_cheesecake': { name: "Napoleon Cheesecake", img: "napoleon_cheesecake.png" },
-            'baker_special': { name: "Special Baker Treat", img: "baker_special.png" }
+            'baker_special': { name: "Baker's Special", img: "baker_special.png" },
+
+            // Kurimanju
+            'coffee_jelly': { name: "Coffee Jelly", img: "coffee_jelly.png" },
+            'sake_steamed_bun': { name: "Sake Steamed Bun", img: "sake_steamed_bun.png" },
+            'mocha_dacquoise': { name: "Mocha Dacquoise", img: "mocha_dacquoise.png" },
+
+            // Rakko
+            'pudding_parfait': { name: "Pudding Parfait", img: "pudding_parfait.png" },
+            'mont_blanc': { name: "Mont Blanc", img: "mont_blanc.png" },
+
+            // Momonga
+            'fruit_sandwich': { name: "Fruit Sandwich", img: "fruit_sandwich.png" },
+            'macaron': { name: "Macaron", img: "macaron.png" }
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -90,6 +109,8 @@
             document.getElementById('food-img').src = item.img;
         } else {
             document.getElementById('status-text').innerText = "Oops! Order not found: " + order;
+            // Optional: show a default image if order is missing
+            document.getElementById('food-img').src = "cakeroll.png";
         }
     </script>
 </body>
