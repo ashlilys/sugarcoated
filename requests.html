@@ -2,113 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>sugarcoated - ashlilys</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <title>sugarcoated - furuhonya</title>
     <link rel="icon" type="image/x-icon" href="cakeroll.png">
     
     <style>
+        /* CSS stays the same as your original code to keep the look consistent */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #fdf6f3;
-            background-image: url('bakery_entrance.png');
-            background-size: cover;
-            background-position: center;
+
+        #game-container {
+            width: 100vw; height: 100vh;
+            background-image: url('bakery_interior.png');
+            background-size: cover; background-position: center;
             background-attachment: fixed;
-            min-height: 100vh;
+            animation: fadeInAnimation 1.5s ease-in;
+            position: relative; overflow: hidden;
         }
 
-        /* nav bar */
-        #top-bar {
-            width: 100%;
-            height: 40px;
-            background-color: #ffdbdb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            border-bottom: 2px solid #f8a5a5;
-            position: relative;
-            z-index: 1000;
-        }
-        
-        .nav-left, .nav-right { flex: 1; white-space: nowrap; }
-        .nav-left { text-align: left; }
-        .nav-right { text-align: right; }
-        
-        .nav-center {
-            flex: 2;
-            font-weight: bold;
-            color: #d17a7a;
-            letter-spacing: 2px;
-            text-transform: lowercase;
-            text-align: center;
+        @keyframes fadeInAnimation { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+        @keyframes characterBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
         }
 
-        #top-bar a { text-decoration: none; color: #d17a7a; font-weight: bold; font-size: 14px; }
+        .bounce { animation: characterBounce 0.3s ease; }
+
+        #top-bar { 
+            width: 100%; height: 50px; background: #ffdbdb; 
+            display: flex; align-items: center; padding: 0 20px; 
+            border-bottom: 2px solid #f8a5a5; z-index: 1000; position: relative; 
+        }
+        .nav-left { flex: 1; text-align: left; }
+        .nav-right { flex: 1; text-align: right; }
+        .nav-center { 
+            flex: 2; text-align: center; font-weight: bold; color: #d17a7a; 
+            font-size: 18px; letter-spacing: 2px; text-transform: lowercase; 
+            font-family: 'Courier New', Courier, monospace; 
+        }
+        
+        #top-bar a { 
+            text-decoration: none; color: #d17a7a; font-weight: bold; 
+            font-size: 14px; font-family: 'Courier New', Courier, monospace; 
+        }
         #top-bar a:hover { color: #ff8b8b; }
 
-        /* content box */
-        #main-content {
-            display: flex;
-            justify-content: center;
-            padding: 50px;
-        }
-        .frosted-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 30px;
-            border: 3px dashed #f8a5a5;
-            text-align: center;
-            max-width: 900px;
+        #character-img {
+            position: absolute; bottom: 250px; left: 50%; transform: translateX(-50%); 
+            height: 55vh; max-height: 450px; z-index: 5;
         }
 
-        /* grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+        #dialogue-box {
+            position: absolute; bottom: 30px; left: 5%; width: 90%; height: 220px;
+            background: rgba(255, 255, 255, 0.95); border: 5px solid #f8a5a5;
+            border-radius: 25px; padding: 30px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 100;
         }
-        .char-card {
-            background: #fff;
-            border: 2px solid #f8a5a5;
-            border-radius: 15px;
-            padding: 15px;
-            text-decoration: none;
-            color: #333;
-            display: block;
-            transition: 0.3s;
+        #text { font-size: 22px; color: #555; margin-bottom: 15px; text-align: center; font-family: 'Courier New', Courier, monospace; }
+
+        .btn {
+            background: #f8a5a5; color: white; border: none; padding: 15px 30px;
+            border-radius: 15px; cursor: pointer; font-family: 'Montserrat', sans-serif;
+            font-weight: 600; font-size: 18px; margin-top: 10px; transition: 0.3s; z-index: 101;
         }
-        .char-card:hover { transform: scale(1.05); background: #fff0f0; }
-        .char-card img { width: 80px; height: 80px; display: block; margin: 0 auto 10px; }
+        .btn:hover { background: #ff8b8b; transform: scale(1.05); }
     </style>
 </head>
 <body>
 
-    <div id="top-bar">
-        <div class="nav-left">
-            <a href="index.html">← go to entrance</a>
-        </div>
-        <div class="nav-center">sugarcoated</div>
-        <div class="nav-right">
-            <a href="https://www.instagram.com/ashliliez/" target="_blank">my instagram: @ashlilys</a>
-        </div>
-    </div>
-
-    <div id="main-content">
-        <div class="frosted-box">
-            <h1>Current Requests</h1>
-            <div class="grid">
-                <a href="chiikawa.html" class="char-card"><img src="chiikawa.png">Chiikawa</a>
-                <a href="hachiware.html" class="char-card"><img src="hachiware.png">Hachiware</a>
-                <a href="momonga.html" class="char-card"><img src="momonga.png">Momonga</a>
-                <a href="rakko.html" class="char-card"><img src="rakko.png">Rakko</a>
-                <a href="kurimanju.html" class="char-card"><img src="kurimanju.png">Kuri-Manjū</a>
-                <a href="usagi.html" class="char-card"><img src="usagi.png">Usagi</a>
+    <div id="game-container">
+        <div id="top-bar">
+            <div class="nav-left"><a href="requests.html">← back to requests</a></div>
+            <div class="nav-center">sugarcoated</div>
+            <div class="nav-right">
+                <a href="https://www.instagram.com/ashliliez/" target="_blank">my instagram: @ashlilys</a>
             </div>
         </div>
+
+        <img id="character-img" src="furuhonya_neutral.png" alt="Furuhonya">
+
+        <div id="dialogue-box">
+            <p id="text">Furuhonya "Hmm, everything looks good..."</p>
+            <button id="order-btn" class="btn" onclick="order()">"Hey Furuhonya! What would you like to order?"</button>
+            <a id="kitchen-link" href="#" class="btn" style="display:none;" onclick="fadeOut(event)">"Alright!"</a>
+        </div>
     </div>
 
+    <script>
+        /**
+         * 4. CHANGE STORAGE_KEY 
+         * Use something unique like 'kaniCount' or 'shishiCount'
+         */
+        const STORAGE_KEY = 'changeMeCount';
+        let clickCount = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
+
+        /**
+         * 5. UPDATE ORDERS
+         * - text: What the character says
+         * - food: Must match the key in your kitchen.html menu
+         * - reply: What the player says back
+         */
+        const orders = [
+            { text: 'Furuhonya: "May I please have the Kinako Monaka Waffles?"', food: "kinako_monaka_waffles", reply: "Ok, coming right up! " },
+            { text: 'Furuhonya: "The Japanese Cheesecake looks really good, could I get that please?"', food: "japanese_cheesecake", reply: "Of course! One Japanese Cheesecake coming right up!" },
+            { text: 'Furuhonya: "The Sago Pudding sounds refreshing! I would love just one please."', food: "sago_pudding", reply: "One Sago Pudding, got it!" }
+        ];
+
+        function order() {
+            const charImg = document.getElementById('character-img');
+            charImg.classList.add('bounce');
+            setTimeout(() => { charImg.classList.remove('bounce'); }, 300);
+
+            const current = orders[clickCount % orders.length];
+
+            document.getElementById('text').innerText = current.text;
+            document.getElementById('kitchen-link').innerText = current.reply;
+            document.getElementById('kitchen-link').href = "kitchen.html?order=" + current.food;
+            
+            document.getElementById('order-btn').style.display = 'none'; 
+            document.getElementById('kitchen-link').style.display = 'block'; 
+        }
+
+        function fadeOut(event) {
+            event.preventDefault(); 
+            localStorage.setItem(STORAGE_KEY, ++clickCount);
+            
+            const container = document.getElementById('game-container');
+            container.style.transition = "opacity 0.5s ease"; 
+            container.style.opacity = "0"; 
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 500); 
+        }
+    </script>
 </body>
 </html>
